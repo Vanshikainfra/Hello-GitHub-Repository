@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Vanshika Infra Enterprises delivers civil construction, railway infrastructure, electrical works, and water infrastructure project services in India." />
   <title>Vanshika Infra Enterprises | Civil & Electrical Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{--navy:#10243b;--blue:#174b78;--gold:#f0ad35;--ink:#172536;--muted:#5d6b79;--pale:#f3f6f9;--white:#fff;--line:#dfe6ed}
     *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.6} a{color:inherit;text-decoration:none}.container{width:min(1140px,92%);margin:auto}
@@ -29,12 +32,23 @@
     footer{background:#091726;color:#d4dfeb;padding:28px 0;font-size:13px}footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}footer strong{color:white}
     @media(max-width:800px){.nav{padding:14px 0;align-items:flex-start}.navlinks{gap:12px;flex-wrap:wrap;justify-content:flex-end}.navlinks a:not(.btn){display:none}.grid,.project-grid,.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-grid,.contact-grid{grid-template-columns:1fr}.hero{padding:76px 0}.cta .container{align-items:flex-start;flex-direction:column}}
     @media(max-width:520px){.topbar .container{font-size:12px}.nav{align-items:center}.navlinks .btn{padding:10px 12px}.grid,.project-grid,.projects-grid{grid-template-columns:1fr}.hero p{font-size:16px}.form{grid-template-columns:1fr}.form .full,.form-note{grid-column:auto}.about-visual{min-height:260px}section{padding:58px 0}}
+  
+    /* Consistent company branding */
+    body{font-family:'Montserrat',Arial,Helvetica,sans-serif}
+    .brand{display:flex;align-items:center;gap:14px;font-family:'Montserrat',Arial,sans-serif;font-weight:800;color:var(--navy);line-height:1.15}
+    .brand-logo-image{display:block;width:54px;height:58px;object-fit:contain;flex:0 0 auto}
+    .brand-name-text{display:block;font-size:clamp(15px,1.5vw,21px);font-weight:800;letter-spacing:.1px;white-space:normal}
+    .brand-name-text small{display:block;font-family:'Montserrat',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-top:5px}
+    .admin-brand-logo{width:54px;height:58px;object-fit:contain;flex:0 0 auto}
+    .admin-brand-name{font-family:'Montserrat',Arial,sans-serif;font-weight:800;letter-spacing:.1px}
+    .admin-brand-name small{display:block;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-top:5px}
+    @media(max-width:520px){.brand-logo-image{width:44px;height:48px}.brand-name-text{font-size:14px}.brand-name-text small{font-size:9px;letter-spacing:1.4px}}
   </style>
 </head>
 <body>
   <div class="topbar"><div class="container"><span>Civil Construction · Railway Infrastructure · Electrical Works</span><span>India | Project-focused execution</span></div></div>
   <header><div class="container nav">
-    <a class="brand" href="#home" aria-label="Vanshika Infra Enterprises home"><span class="logo">VI</span><span>VANSHIKA INFRA ENTERPRISES<small>BUILDING INFRASTRUCTURE</small></span></a>
+    <a class="brand" href="#home" aria-label="Vanshika Infra Enterprises home"><img class="brand-logo-image" src="company-logo.png" alt="Vanshika Infra Enterprises logo"><span class="brand-name-text">VANSHIKA INFRA ENTERPRISES<small>BUILDING INFRASTRUCTURE</small></span></a>
     <nav class="navlinks" aria-label="Main navigation"><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Project Areas</a><a href="#contact">Contact</a><a class="btn" href="#contact">Discuss a Project</a></nav>
   </div></header>
   <main>
