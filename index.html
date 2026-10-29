@@ -136,7 +136,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
 function sendEnquiry(e){e.preventDefault();const f=new FormData(e.target);const subject=encodeURIComponent('Website Enquiry - '+f.get('service'));const body=encodeURIComponent('Name: '+f.get('name')+'\\nPhone: '+f.get('phone')+'\\nEmail: '+f.get('email')+'\\nService: '+f.get('service')+'\\n\\nProject Details:\\n'+f.get('message'));window.location.href='mailto:projects@vanshikainfra.com?subject='+subject+'&body='+body;}
   async function loadProjects() {
   const SUPABASE_URL = 'https://fckzhfjagpppcwllsqmg.supabase.co';
-  const SUPABASE_KEY = 'మీ_PUBLISHABLE_KEY_ఇక్కడ';
+  const SUPABASE_KEY = 'sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrlI0';
 
   const container = document.getElementById('projects-grid');
 
