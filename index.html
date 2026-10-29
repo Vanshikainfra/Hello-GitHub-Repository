@@ -62,6 +62,7 @@ h2{font-size:clamp(29px,3.5vw,42px);line-height:1.15;color:var(--navy);margin:12
 .card h3{color:var(--navy);margin:0 0 10px;font-size:20px}
 .card p{color:var(--muted);font-size:14px;margin:0}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.live-projects{margin-top:48px}.live-projects .section-head{margin-bottom:28px}.live-project-card{background:#fff;border:1px solid #e3eaf3;border-radius:8px;overflow:hidden;box-shadow:0 10px 28px #0a245008}.live-project-card img{width:100%;height:210px;object-fit:cover;display:block}.live-project-body{padding:20px}.live-project-body h3{color:var(--navy);margin:0 0 8px}.live-project-body p{color:var(--muted);font-size:14px;margin:8px 0}.project-status{display:inline-block;padding:4px 10px;border-radius:20px;background:#fff2cf;color:#805800;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}.project-location{font-size:12px;color:#9a6a12;font-weight:700}.project-empty{grid-column:1/-1;padding:28px;border:1px dashed #cbd6e5;border-radius:8px;text-align:center;color:var(--muted);background:#f9fbfe}.admin-footer-link{color:#f2b544;font-weight:700}.admin-footer-link:hover{text-decoration:underline}
 .project{min-height:230px;border-radius:7px;overflow:hidden;position:relative;background:#18365c}
 .project img{width:100%;height:100%;min-height:230px;object-fit:cover;display:block;transition:transform .35s}
 .project:hover img{transform:scale(1.04)}
@@ -122,17 +123,34 @@ footer b{color:#fff}
 <div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80" alt="Civil construction site"><div class="project-label"><span>Construction</span><strong>Civil & Building Works</strong></div></div>
 <div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=80" alt="Railway track infrastructure"><div class="project-label"><span>Infrastructure</span><strong>Railway Works</strong></div></div>
 <div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80" alt="Electrical installation"><div class="project-label"><span>Electrical</span><strong>Electrical Installations</strong></div></div>
-</div></div></section>
+</div>
+<div class="live-projects"><div class="section-head"><div class="eyebrow">Project portfolio</div><h2>Our Project Details</h2><p>Project information published by our team. The list below updates from the company project database.</p></div><div class="projects-grid" id="liveProjects"><div class="project-empty">Loading project details…</div></div></div>
+</div></section>
 <div class="cta"><div class="wrap cta-row"><div><h2>Have a project requirement?</h2><p>Contact our team to discuss your infrastructure or construction work.</p></div><a class="btn" href="#contact">Get in Touch →</a></div></div>
 <section class="contact" id="contact"><div class="wrap"><div class="section-head"><div class="eyebrow">Contact us</div><h2>Let's Build Something Reliable</h2><p>Reach out to Vanshika Infra Enterprises for enquiries and project discussions.</p></div>
 <div class="contact-grid"><div class="contact-info"><h3>Company Details</h3><div class="contact-item"><b>Phone / WhatsApp</b><a href="tel:+917382446663">+91 73824 46663</a></div><div class="contact-item"><b>Email</b><a href="mailto:projects@vanshikainfra.com">projects@vanshikainfra.com</a></div><div class="contact-item"><b>Address</b>C-1, Kotta Veedi, Takkoyi Village, Karajada, Meliyaputti, Palasa, Srikakulam, Andhra Pradesh – 532221</div><div class="contact-item"><b>Website</b>www.vanshikainfra.com</div></div>
 <form class="contact-form" onsubmit="sendEnquiry(event)"><div class="fields"><div><label for="name">Your Name *</label><input id="name" name="name" required></div><div><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel"></div><div class="full"><label for="email">Email Address</label><input id="email" name="email" type="email"></div><div class="full"><label for="service">Service Required</label><select id="service" name="service"><option>Civil Construction</option><option>Railway Infrastructure Works</option><option>Electrical Works</option><option>Building Construction</option><option>Electrical Installation Works</option><option>Other Enquiry</option></select></div><div class="full"><label for="message">Project Details *</label><textarea id="message" name="message" required></textarea></div><div class="full"><button class="btn" type="submit">Send Enquiry by Email →</button></div></div><p style="font-size:12px;color:#718096;margin-bottom:0">This opens your email app with the enquiry prepared; it does not send data to a website server.</p></form>
 </div></div></section>
 </main>
-<footer><div class="wrap"><span>© <span id="year"></span> <b>Vanshika Infra Enterprises</b>. All rights reserved.</span><span>Building Infrastructure • India</span></div></footer>
+<footer><div class="wrap"><span>© <span id="year"></span> <b>Vanshika Infra Enterprises</b>. All rights reserved.</span><span>Building Infrastructure • India &nbsp; | &nbsp; <a class="admin-footer-link" href="vanshika-admin-panel.html">Admin Panel Login ↗</a></span></div></footer>
 <a class="whatsapp" href="https://wa.me/917382446663?text=Hello%20Vanshika%20Infra%20Enterprises%2C%20I%20have%20a%20project%20enquiry." target="_blank" rel="noopener">WhatsApp ↗</a>
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
+// Load project details published through the admin panel.
+(async function loadProjects(){
+ const container=document.getElementById('liveProjects');
+ const SUPABASE_URL='https://fckzhfjagpppcwllsqmg.supabase.co';
+ const SUPABASE_KEY='sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrl0I0';
+ try{
+  const response=await fetch(SUPABASE_URL+'/rest/v1/projects?select=id,title,location,description,image_url,status&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+  if(!response.ok) throw new Error('Could not load projects');
+  const projects=await response.json();
+  if(!projects.length){container.innerHTML='<div class="project-empty">Project details will appear here when they are added through the Admin Panel.</div>';return;}
+  container.innerHTML=projects.map(p=>{const title=escapeHtml(p.title||'Project');const location=escapeHtml(p.location||'');const description=escapeHtml(p.description||'');const status=escapeHtml(p.status||'Project');const image=(p.image_url||'').trim();const imageHtml=image?'<img loading="lazy" src="'+escapeAttr(image)+'" alt="'+escapeAttr(title)+'" onerror="this.style.display=\'none\'">':'';return '<article class="live-project-card">'+imageHtml+'<div class="live-project-body"><span class="project-status">'+status+'</span><h3>'+title+'</h3>'+(location?'<div class="project-location">📍 '+location+'</div>':'')+(description?'<p>'+description+'</p>':'')+'</div></article>';}).join('');
+ }catch(err){container.innerHTML='<div class="project-empty">Project details are temporarily unavailable. Please check your internet connection or database settings.</div>';console.error(err);}
+})();
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function escapeAttr(value){return escapeHtml(value);}
 function sendEnquiry(e){e.preventDefault();const f=new FormData(e.target);const subject=encodeURIComponent('Website Enquiry - '+f.get('service'));const body=encodeURIComponent('Name: '+f.get('name')+'\\nPhone: '+f.get('phone')+'\\nEmail: '+f.get('email')+'\\nService: '+f.get('service')+'\\n\\nProject Details:\\n'+f.get('message'));window.location.href='mailto:projects@vanshikainfra.com?subject='+subject+'&body='+body;}
 </script>
 </body></html>
