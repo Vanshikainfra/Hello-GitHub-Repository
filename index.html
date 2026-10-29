@@ -119,9 +119,9 @@ footer b{color:#fff}
 </div></div></section>
 <section id="projects"><div class="wrap"><div class="section-head"><div class="eyebrow">Our work areas</div><h2>Infrastructure That Moves Us Forward</h2><p>Our service areas span core construction, railway-related works and electrical installations.</p></div>
 <div class="projects-grid">
-<div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80" alt="Civil construction site"><div class="project-label"><span>Construction</span><strong>Civil & Building Works</strong></div></div>
-<div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=80" alt="Railway track infrastructure"><div class="project-label"><span>Infrastructure</span><strong>Railway Works</strong></div></div>
-<div class="project"><img loading="lazy" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80" alt="Electrical installation"><div class="project-label"><span>Electrical</span><strong>Electrical Installations</strong></div></div>
+<div class="projects-grid" id="projects-grid">
+  <p>Loading projects...</p>
+</div>
 </div></div></section>
 <div class="cta"><div class="wrap cta-row"><div><h2>Have a project requirement?</h2><p>Contact our team to discuss your infrastructure or construction work.</p></div><a class="btn" href="#contact">Get in Touch →</a></div></div>
 <section class="contact" id="contact"><div class="wrap"><div class="section-head"><div class="eyebrow">Contact us</div><h2>Let's Build Something Reliable</h2><p>Reach out to Vanshika Infra Enterprises for enquiries and project discussions.</p></div>
@@ -134,5 +134,54 @@ footer b{color:#fff}
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
 function sendEnquiry(e){e.preventDefault();const f=new FormData(e.target);const subject=encodeURIComponent('Website Enquiry - '+f.get('service'));const body=encodeURIComponent('Name: '+f.get('name')+'\\nPhone: '+f.get('phone')+'\\nEmail: '+f.get('email')+'\\nService: '+f.get('service')+'\\n\\nProject Details:\\n'+f.get('message'));window.location.href='mailto:projects@vanshikainfra.com?subject='+subject+'&body='+body;}
+  async function loadProjects() {
+  const SUPABASE_URL = 'https://fckzhfjagpppcwllsqmg.supabase.co';
+  const SUPABASE_KEY = 'మీ_PUBLISHABLE_KEY_ఇక్కడ';
+
+  const container = document.getElementById('projects-grid');
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/Projects?select=*&order=id.desc`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+
+    const projects = await response.json();
+
+    if (!projects.length) {
+      container.innerHTML = '<p>No projects available yet.</p>';
+      return;
+    }
+
+    container.innerHTML = projects.map(project => `
+      <div class="project">
+        ${project.image_url
+          ? `<img src="${project.image_url}" alt="${project.title || 'Project'}" loading="lazy">`
+          : ''}
+        <div class="project-label">
+          <span>${project.location || ''}</span>
+          <strong>${project.title || ''}</strong>
+          <p>${project.description || ''}</p>
+          <small>${project.status || ''}</small>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error('Project loading failed:', error);
+    container.innerHTML = '<p>Projects could not be loaded. Please try again later.</p>';
+  }
+}
+
+loadProjects();
 </script>
 </body></html>
