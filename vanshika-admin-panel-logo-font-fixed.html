@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vanshika Infra Enterprises delivers civil construction, railway infrastructure, electrical works, and water infrastructure project services in India." />
+  <title>Vanshika Infra Enterprises | Civil & Electrical Works</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+    :root{--navy:#10243b;--blue:#174b78;--gold:#f0ad35;--ink:#172536;--muted:#5d6b79;--pale:#f3f6f9;--white:#fff;--line:#dfe6ed}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:'Montserrat',Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.6} a{color:inherit;text-decoration:none}.container{width:min(1140px,92%);margin:auto}
+    .topbar{background:#0a1929;color:#e8eef5;font-size:13px;padding:8px 0}.topbar .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header{background:var(--white);position:sticky;top:0;z-index:10;box-shadow:0 2px 14px #0c203012}.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy);line-height:1.15}.logo{width:48px;height:48px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:21px;font-weight:900;border-radius:8px;border-bottom:4px solid var(--gold)}.brand small{display:block;font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:5px}.navlinks{display:flex;align-items:center;gap:25px;font-size:14px;font-weight:700}.navlinks a:hover{color:var(--blue)}.btn{display:inline-block;background:var(--gold);color:#172536;padding:12px 19px;border-radius:4px;font-weight:800;font-size:14px;border:0;cursor:pointer}.btn:hover{filter:brightness(.96)}.btn-outline{background:transparent;border:1px solid #ffffffa8;color:white;margin-left:8px}
+    .hero{color:white;background:linear-gradient(90deg,rgba(10,26,44,.94),rgba(16,48,76,.76)),url('assets/hero.svg') center/cover no-repeat;padding:100px 0 92px}.eyebrow{font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:12px}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.12;max-width:760px;margin:16px 0}.hero p{font-size:18px;color:#e2eaf2;max-width:680px;margin:0 0 28px}.hero-note{margin-top:32px;display:flex;gap:24px;flex-wrap:wrap;color:#d7e2ed;font-size:13px}.hero-note span:before{content:'✓';color:var(--gold);font-weight:bold;margin-right:8px}
+    section{padding:76px 0}.section-head{text-align:center;max-width:740px;margin:0 auto 38px}.section-head h2{font-size:clamp(28px,3vw,38px);line-height:1.2;margin:10px 0 14px;color:var(--navy)}.section-head p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.card{background:white;border:1px solid var(--line);border-radius:8px;padding:26px;box-shadow:0 8px 24px #10243b08}.icon{width:52px;height:52px;display:grid;place-items:center;background:#eaf1f7;color:var(--blue);font-size:25px;border-radius:8px}.card h3{margin:18px 0 8px;color:var(--navy);font-size:20px}.card p{margin:0;color:var(--muted);font-size:15px}.soft{background:var(--pale)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}.about-visual{min-height:350px;border-radius:10px;background:linear-gradient(145deg,#163a5b,#0c1e31);padding:28px;display:flex;align-items:end;color:white;position:relative;overflow:hidden}.about-visual:before{content:'';position:absolute;width:240px;height:240px;border:26px solid #f0ad3540;border-radius:50%;top:-55px;right:-40px}.visual-caption{position:relative;max-width:290px}.visual-caption strong{display:block;font-size:27px;line-height:1.2;margin-bottom:10px}.about-copy h2{font-size:36px;line-height:1.2;color:var(--navy);margin:10px 0 18px}.about-copy p{color:var(--muted)}.checklist{padding:0;list-style:none}.checklist li{margin:12px 0;font-weight:700}.checklist li:before{content:'✓';color:#16805d;margin-right:10px}
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.project{min-height:225px;border-radius:8px;padding:24px;display:flex;flex-direction:column;justify-content:end;color:white;background:linear-gradient(0deg,#0b1d30ed,#0b1d3020),var(--bg,#254965);overflow:hidden}.project:nth-child(2){--bg:#345f70}.project:nth-child(3){--bg:#536477}.project:nth-child(4){--bg:#38546a}.project:nth-child(5){--bg:#2b6264}.project:nth-child(6){--bg:#4b5368}.project .tag{font-size:11px;color:var(--gold);letter-spacing:1.5px;font-weight:800;text-transform:uppercase}.project h3{font-size:21px;margin:8px 0 4px}.project p{margin:0;color:#e2eaf2;font-size:14px}
+    /* Dynamic projects loaded from Supabase */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:100%;max-width:1200px;margin:0 auto;padding:0 20px;box-sizing:border-box}
+    .db-project{position:relative;min-width:0;min-height:320px;overflow:hidden;border-radius:14px;background:#17264f;box-shadow:0 5px 18px rgba(0,0,0,.12);color:#fff;isolation:isolate}
+    .db-project img{display:block;width:100%;height:320px;object-fit:cover}
+    .db-project.no-image{background:linear-gradient(135deg,#10243b,#345f70);}
+    .db-project-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(0deg,rgba(10,20,42,.96),rgba(10,20,42,.06) 90%);overflow-wrap:anywhere}
+    .db-project-location{font-size:13px;margin-bottom:7px;color:#f0c15c}
+    .db-project h3{font-size:21px;line-height:1.3;margin:0 0 8px;color:#fff}
+    .db-project p{font-size:14px;line-height:1.55;margin:0 0 12px;color:#eef3fa}
+    .db-project-status{align-self:flex-start;display:inline-block;background:#f0ad35;color:#17264f;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:700}
+    .projects-message{grid-column:1/-1;text-align:center;color:var(--muted);padding:25px}
+    .cta{background:var(--navy);color:white;padding:52px 0}.cta .container{display:flex;justify-content:space-between;align-items:center;gap:24px}.cta h2{font-size:30px;line-height:1.2;margin:0 0 8px}.cta p{margin:0;color:#d5e0eb}.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}.contact-info h3{color:var(--navy);font-size:23px;margin-top:0}.contact-item{border-bottom:1px solid var(--line);padding:14px 0}.contact-item strong{display:block;color:var(--navy)}.contact-item span{color:var(--muted);overflow-wrap:anywhere}.form{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form label{font-size:13px;font-weight:700;color:var(--navy)}.form input,.form textarea,.form select{width:100%;padding:12px;border:1px solid #cbd5df;border-radius:4px;font:inherit;margin-top:6px}.form .full{grid-column:1/-1}.form textarea{min-height:125px;resize:vertical}.form-note{font-size:12px;color:var(--muted);grid-column:1/-1;margin:0}
+    footer{background:#091726;color:#d4dfeb;padding:28px 0;font-size:13px}footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}footer strong{color:white}
+    @media(max-width:800px){.nav{padding:14px 0;align-items:flex-start}.navlinks{gap:12px;flex-wrap:wrap;justify-content:flex-end}.navlinks a:not(.btn){display:none}.grid,.project-grid,.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-grid,.contact-grid{grid-template-columns:1fr}.hero{padding:76px 0}.cta .container{align-items:flex-start;flex-direction:column}}
+    @media(max-width:520px){.topbar .container{font-size:12px}.nav{align-items:center}.navlinks .btn{padding:10px 12px}.grid,.project-grid,.projects-grid{grid-template-columns:1fr}.hero p{font-size:16px}.form{grid-template-columns:1fr}.form .full,.form-note{grid-column:auto}.about-visual{min-height:260px}section{padding:58px 0}}
+
+    .admin-link{font-size:12px;opacity:.8;text-decoration:underline}
+    .admin-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px;margin:28px auto;max-width:1000px}
+    .admin-brand{display:flex;align-items:center;gap:12px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+    .admin-brand-logo{width:58px;height:58px;flex:0 0 58px;object-fit:contain;display:block}
+    .brand-logo-image{width:58px;height:58px;flex:0 0 58px;object-fit:contain;display:block}
+    .brand-name-text{font-family:'Montserrat',Arial,sans-serif;font-size:18px;font-weight:900;letter-spacing:.25px;line-height:1.15;color:var(--navy)}
+    .brand-name-text small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:5px;font-weight:800}
+    .admin-brand-name{font-size:20px;font-weight:900;letter-spacing:.2px;line-height:1.15;color:var(--navy)}
+    .admin-brand-name small{display:block;font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:5px;font-weight:800}
+    .admin-panel h2{font-size:30px;letter-spacing:.1px}
+    .admin-panel h2{color:var(--navy);margin-top:0}.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .admin-form input,.admin-form textarea,.admin-form select{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:4px;font:inherit}
+    .admin-form textarea{min-height:90px}.admin-form .full{grid-column:1/-1}
+    .admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.admin-message{margin:12px 0;color:var(--muted);overflow-wrap:anywhere}
+    .admin-list{display:grid;gap:10px;margin-top:20px}.admin-row{border:1px solid var(--line);padding:12px;border-radius:6px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    @media(max-width:520px){.admin-form{grid-template-columns:1fr}.admin-form .full{grid-column:auto}.admin-row{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="container"><span>Civil Construction · Railway Infrastructure · Electrical Works</span><span>India | Project-focused execution</span></div></div>
+  <header><div class="container nav">
+    <a class="brand" href="#home" aria-label="Vanshika Infra Enterprises home"><img class="brand-logo-image" src="company-logo.png" alt="Vanshika Infra Enterprises logo"><span class="brand-name-text">VANSHIKA INFRA ENTERPRISES<small>BUILDING INFRASTRUCTURE</small></span></a>
+    <nav class="navlinks" aria-label="Main navigation"><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Project Areas</a><a href="#contact">Contact</a><a class="btn" href="#contact">Discuss a Project</a></nav>
+  </div></header>
+  <main>
+    <section class="hero" id="home"><div class="container"><div class="eyebrow">Infrastructure • Civil • Electrical</div><h1>Reliable execution for essential infrastructure.</h1><p>Vanshika Infra Enterprises undertakes civil construction, railway infrastructure and electrical works, with a focus on site coordination, resource planning, safety and quality.</p><a class="btn" href="#services">Explore Our Services</a><a class="btn btn-outline" href="#contact">Contact Our Team</a><div class="hero-note"><span>Site-focused planning</span><span>Quality-conscious execution</span><span>Coordinated project delivery</span></div></div></section>
+    <section id="services"><div class="container"><div class="section-head"><div class="eyebrow">What We Do</div><h2>Civil and electrical capabilities</h2><p>Practical construction support across infrastructure projects, from site preparation and civil structures to electrical works and installation.</p></div><div class="grid">
+      <article class="card"><div class="icon">▦</div><h3>Civil Construction</h3><p>Building and structural works, foundations, reinforcement, shuttering, concreting and associated site activities.</p></article>
+      <article class="card"><div class="icon">⚡</div><h3>Electrical Works</h3><p>Electrical installation and infrastructure works, including lighting, distribution systems and associated site coordination.</p></article>
+      <article class="card"><div class="icon">🚆</div><h3>Railway Infrastructure</h3><p>Construction support for railway-related infrastructure projects, subject to the project scope and tender requirements.</p></article>
+      <article class="card"><div class="icon">≈</div><h3>Water Infrastructure</h3><p>Project work areas can include water treatment plants, pump houses, intake wells, ESRs and OHTs.</p></article>
+      <article class="card"><div class="icon">⚙</div><h3>Site & Resource Coordination</h3><p>Planning and coordination of manpower, machinery, materials and daily site activities to support progress.</p></article>
+      <article class="card"><div class="icon">✓</div><h3>Quality & Safety Focus</h3><p>Attention to work inspections, site safety, execution records and coordination with project stakeholders.</p></article>
+    </div></div></section>
+    <section class="soft" id="about"><div class="container about-grid"><div class="about-visual"><div class="visual-caption"><strong>Planning well.<br>Building responsibly.</strong><span>Infrastructure works with a practical, site-first approach.</span></div></div><div class="about-copy"><div class="eyebrow">About Our Company</div><h2>Built around dependable project execution.</h2><p>Vanshika Infra Enterprises is a civil and electrical works contractor engaged in infrastructure projects through tender-based opportunities. We aim to support project delivery through clear coordination, responsible resource use and attention to quality and safety.</p><ul class="checklist"><li>Civil construction and structural activities</li><li>Railway and public infrastructure project work</li><li>Electrical works and installations</li><li>Site coordination and progress monitoring</li></ul><a class="btn" href="#contact">Get in Touch</a></div></div></section>
+    <section id="projects" class="soft"><div class="container"><div class="section-head"><div class="eyebrow">Our Work</div><h2>Projects & Experience</h2><p>Selected infrastructure projects undertaken by Vanshika Infra Enterprises.</p></div><div class="projects-grid" id="projects-grid"><p class="projects-message">Loading projects...</p></div></div></section>
+    <section class="cta"><div class="container"><div><h2>Planning an infrastructure project?</h2><p>Contact Vanshika Infra Enterprises to discuss your project requirements.</p></div><a class="btn" href="#contact">Contact Us</a></div></section>
+    <section id="contact"><div class="container"><div class="section-head"><div class="eyebrow">Contact</div><h2>Let’s discuss your project</h2><p>Update the contact details below before publishing the website.</p></div><div class="contact-grid"><div class="contact-info"><h3>Vanshika Infra Enterprises</h3><p style="color:var(--muted)">Civil Construction · Railway Infrastructure · Electrical Works</p><div class="contact-item"><strong>Email</strong><span>projects@vanshikainfra.com</span></div><div class="contact-item"><strong>Phone</strong><span><a href="tel:+917382446663">+91 73824 46663</a></span></div><div class="contact-item"><strong>Office Address</strong><span>C-1, Kotta Veedi, Takkoyi Village, Karajada, Meliyaputti, Palasa, Srikakulam, Andhra Pradesh - 532221</span></div><div class="contact-item"><strong>Website</strong><span>www.vanshikainfra.com</span></div></div>
+      <form class="form" onsubmit="event.preventDefault(); alert('This sample form is a design preview and is not connected to email yet. Please add a form service or website-builder form before publishing.');"><label>Name<input required name="name" placeholder="Your name"></label><label>Phone / Email<input required name="contact" placeholder="How can we reach you?"></label><label class="full">Service required<select name="service"><option>Civil Construction</option><option>Electrical Works</option><option>Railway Infrastructure</option><option>Water Infrastructure</option><option>Other enquiry</option></select></label><label class="full">Message<textarea name="message" placeholder="Tell us briefly about your project"></textarea></label><button class="btn" type="submit">Send Enquiry</button><p class="form-note">Demo form only: connect a form service before going live.</p></form>
+    </div></div></section>
+  </main>
+
+  <section id="admin" class="soft" style="padding:28px 0">
+    <div class="container">
+      <div class="admin-panel" id="admin-panel">
+        <div class="admin-brand"><img class="admin-brand-logo" src="company-logo.png" alt="Vanshika Infra Enterprises logo"><span class="admin-brand-name">VANSHIKA INFRA ENTERPRISES<small>BUILDING INFRASTRUCTURE</small></span></div>
+        <h2>Website Admin Panel</h2>
+        <div id="admin-login">
+          <p>Sign in with your authorized admin email and password.</p>
+          <div class="admin-form">
+            <input id="admin-email" type="email" autocomplete="username" placeholder="Admin email" required>
+            <input id="admin-password" type="password" autocomplete="current-password" placeholder="Password" required>
+          </div>
+          <div class="admin-actions"><button class="btn" id="admin-login-btn" type="button">Login</button></div>
+        </div>
+        <div id="admin-workspace" hidden>
+          <p id="admin-welcome">Signed in.</p>
+          <h3 id="project-form-heading">Add a project</h3>
+          <form id="admin-project-form" class="admin-form">
+            <input id="project-title" required maxlength="160" placeholder="Project title">
+            <input id="project-location" maxlength="160" placeholder="Location">
+            <textarea id="project-description" class="full" maxlength="2000" placeholder="Project description"></textarea>
+            <input id="project-image" class="full" type="url" placeholder="Image URL (https://...)">
+            <select id="project-status"><option>Ongoing</option><option>Completed</option><option>Upcoming</option></select>
+            <input id="project-id" type="hidden">
+            <div class="full admin-actions"><button class="btn" type="submit" id="project-save-btn">Save project</button><button class="btn" type="button" id="project-cancel-btn" style="background:#dfe6ed">Clear form</button></div>
+          </form>
+          <p class="admin-message" id="admin-message" role="status"></p>
+          <h3>Existing projects</h3><div id="admin-project-list" class="admin-list"></div>
+          <div class="admin-actions"><button class="btn" id="admin-logout-btn" type="button" style="background:#dfe6ed">Logout</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="container"><span>© <span id="year"></span> <strong>Vanshika Infra Enterprises</strong>. All rights reserved.</span><span>Civil Construction + Electrical Works · <a class="admin-link" href="#admin" id="show-admin-link">Admin</a></span></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const SUPABASE_URL = 'https://fckzhfjagpppcwllsqmg.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrlI0';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const projectContainer = document.getElementById('projects-grid');
+    const adminPanel = document.getElementById('admin-panel');
+    const adminMessage = document.getElementById('admin-message');
+    const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+
+    async function loadProjects() {
+      try {
+        const { data, error } = await supabaseClient.from('projects')
+          .select('id,title,location,description,image_url,status').order('id', { ascending: false });
+        if (error) throw error;
+        if (!data || !data.length) {
+          projectContainer.innerHTML = '<p class="projects-message">Projects will be added soon.</p>';
+          return;
+        }
+        projectContainer.innerHTML = data.map(project => {
+          const title = escapeHTML(project.title || 'Infrastructure Project');
+          const image = String(project.image_url || '').trim();
+          const safeImage = /^https:\/\//i.test(image) ? escapeHTML(image) : '';
+          return `<article class="db-project ${safeImage ? '' : 'no-image'}">
+            ${safeImage ? `<img src="${safeImage}" alt="${title}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('no-image')">` : ''}
+            <div class="db-project-overlay">
+              ${project.location ? `<span class="db-project-location">${escapeHTML(project.location)}</span>` : ''}
+              <h3>${title}</h3>
+              ${project.description ? `<p>${escapeHTML(project.description)}</p>` : ''}
+              ${project.status ? `<span class="db-project-status">${escapeHTML(project.status)}</span>` : ''}
+            </div></article>`;
+        }).join('');
+      } catch (error) {
+        console.error('Project loading failed:', error);
+        projectContainer.innerHTML = '<p class="projects-message">Projects could not be loaded right now. Please try again later.</p>';
+      }
+    }
+
+    function showAdminMessage(message, isError=false) {
+      adminMessage.textContent = message;
+      adminMessage.style.color = isError ? '#b42318' : '#16805d';
+    }
+    function clearProjectForm() {
+      document.getElementById('admin-project-form').reset();
+      document.getElementById('project-id').value = '';
+      document.getElementById('project-form-heading').textContent = 'Add a project';
+      document.getElementById('project-save-btn').textContent = 'Save project';
+    }
+    async function refreshAdminProjects() {
+      const list = document.getElementById('admin-project-list');
+      list.innerHTML = '<p>Loading projects…</p>';
+      const { data, error } = await supabaseClient.from('projects')
+        .select('id,title,location,description,image_url,status').order('id', { ascending: false });
+      if (error) { list.textContent = 'Could not load projects: ' + error.message; return; }
+      if (!data.length) { list.textContent = 'No projects added yet.'; return; }
+      list.innerHTML = data.map(p => `<div class="admin-row">
+        <div><strong>${escapeHTML(p.title)}</strong><br><small>${escapeHTML(p.location || '')} · ${escapeHTML(p.status || '')}</small></div>
+        <div class="admin-actions">
+          <button class="btn" type="button" data-edit="${escapeHTML(p.id)}" style="padding:8px 12px">Edit</button>
+          <button class="btn" type="button" data-delete="${escapeHTML(p.id)}" style="padding:8px 12px;background:#f4d4d4">Delete</button>
+        </div></div>`).join('');
+      list.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => {
+        const p = data.find(item => String(item.id) === btn.dataset.edit);
+        if (!p) return;
+        document.getElementById('project-id').value = p.id;
+        document.getElementById('project-title').value = p.title || '';
+        document.getElementById('project-location').value = p.location || '';
+        document.getElementById('project-description').value = p.description || '';
+        document.getElementById('project-image').value = p.image_url || '';
+        document.getElementById('project-status').value = p.status || 'Ongoing';
+        document.getElementById('project-form-heading').textContent = 'Edit project';
+        document.getElementById('project-save-btn').textContent = 'Update project';
+        document.getElementById('admin-project-form').scrollIntoView({behavior:'smooth',block:'center'});
+      }));
+      list.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', async () => {
+        const p = data.find(item => String(item.id) === btn.dataset.delete);
+        if (!p || !confirm(`Delete "${p.title}"? This cannot be undone.`)) return;
+        const { error } = await supabaseClient.from('projects').delete().eq('id', p.id);
+        if (error) { showAdminMessage('Delete failed: ' + error.message, true); return; }
+        showAdminMessage('Project deleted.');
+        await refreshAdminProjects(); await loadProjects();
+      }));
+    }
+    async function syncAuthState() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      document.getElementById('admin-login').hidden = !!session;
+      document.getElementById('admin-workspace').hidden = !session;
+      if (session) {
+        document.getElementById('admin-welcome').textContent = 'Signed in as ' + session.user.email;
+        await refreshAdminProjects();
+      }
+    }
+    document.getElementById('show-admin-link').addEventListener('click', async () => {
+      adminPanel.style.display = 'block';
+      await syncAuthState();
+      adminPanel.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('admin-login-btn').addEventListener('click', async () => {
+      const email = document.getElementById('admin-email').value.trim();
+      const password = document.getElementById('admin-password').value;
+      showAdminMessage('');
+      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) { showAdminMessage('Login failed: ' + error.message, true); return; }
+      document.getElementById('admin-password').value = '';
+      await syncAuthState();
+      showAdminMessage('Login successful.');
+    });
+    document.getElementById('admin-logout-btn').addEventListener('click', async () => {
+      await supabaseClient.auth.signOut();
+      clearProjectForm();
+      await syncAuthState();
+      showAdminMessage('You are logged out.');
+    });
+    document.getElementById('project-cancel-btn').addEventListener('click', clearProjectForm);
+    document.getElementById('admin-project-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const id = document.getElementById('project-id').value;
+      const imageUrl = document.getElementById('project-image').value.trim();
+      if (imageUrl && !/^https:\/\//i.test(imageUrl)) {
+        showAdminMessage('Please use a secure https:// image URL.', true); return;
+      }
+      const project = {
+        title: document.getElementById('project-title').value.trim(),
+        location: document.getElementById('project-location').value.trim(),
+        description: document.getElementById('project-description').value.trim(),
+        image_url: imageUrl || null,
+        status: document.getElementById('project-status').value
+      };
+      const { error } = id
+        ? await supabaseClient.from('projects').update(project).eq('id', id)
+        : await supabaseClient.from('projects').insert(project);
+      if (error) { showAdminMessage('Save failed: ' + error.message, true); return; }
+      showAdminMessage(id ? 'Project updated successfully.' : 'Project added successfully.');
+      clearProjectForm();
+      await refreshAdminProjects(); await loadProjects();
+    });
+    loadProjects();
+  </script>
+</body>
+</html>
