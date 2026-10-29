@@ -1,1 +1,82 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Secure project administration for Vanshika Infra Enterprises.">
+<title>Admin Panel | Vanshika Infra Enterprises</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#0a2450;--blue:#123b76;--gold:#f2b544;--ink:#17243a;--muted:#66758a;--pale:#f4f7fb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.6;background:var(--pale)}
+a{color:inherit;text-decoration:none}.wrap{width:min(1100px,92%);margin:auto}
+.topbar{background:#071a38;color:#eaf0fa;font-size:13px;padding:9px 0}header{background:#fff;box-shadow:0 5px 24px #0a245012}
+.nav{min-height:86px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:56px;height:56px;border-radius:6px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:24px;font-weight:900}
+.brand strong{display:block;color:var(--navy);font-size:16px;line-height:1.2}.brand small{display:block;color:#9a6a12;font-weight:700;letter-spacing:2px;font-size:10px;margin-top:5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#101d32;font-weight:800;padding:12px 18px;border-radius:4px;border:0;cursor:pointer}
+main{padding:38px 0 70px}.page-title{margin-bottom:22px}.eyebrow{color:#b77b10;font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}h1{color:var(--navy);font-size:clamp(30px,4vw,42px);line-height:1.15;margin:8px 0}h2{color:var(--navy);font-size:23px;margin:0 0 8px}.muted{color:var(--muted);margin-top:0}
+.panel{background:#fff;border:1px solid #e3eaf3;border-radius:7px;padding:26px;margin:20px 0;box-shadow:0 10px 28px #0a245008}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:700;color:#33445c;margin-bottom:6px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #d9e1eb;border-radius:4px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:110px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn.secondary{background:var(--blue);color:#fff}.btn.danger{background:#b42318;color:#fff}
+.status{display:none;padding:12px 14px;border-radius:4px;margin-top:14px;white-space:pre-wrap}.status.ok{display:block;background:#eaf7ee;color:#176538}.status.err{display:block;background:#fff0ef;color:#a21b15}
+.hidden{display:none!important}.small{font-size:12px;color:var(--muted)}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #e3eaf3;vertical-align:top}th{font-size:12px;color:#66758a;text-transform:uppercase;letter-spacing:.6px}td{font-size:14px}.project-name{font-weight:800;color:var(--navy)}.actions{display:flex;gap:7px;flex-wrap:wrap}footer{background:#06172f;color:#c6d2e3;padding:24px 0;font-size:13px}footer b{color:#fff}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:18px}.nav{padding:12px 0}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">Infrastructure • Civil Construction • Electrical Works <span style="float:right">Admin access</span></div></div>
+<header><div class="wrap nav">
+<a class="brand" href="index.html"><span class="brand-mark">VI</span><span><strong>VANSHIKA INFRA<br>ENTERPRISES</strong><small>BUILDING INFRASTRUCTURE</small></span></a>
+<a class="btn" href="index.html">← View Website</a>
+</div></header>
+<main class="wrap">
+<div class="page-title"><div class="eyebrow">Website management</div><h1>Admin Panel</h1><p class="muted">Manage project details shown on your website. Sign in with the admin account registered in Supabase.</p></div>
+<section id="loginPanel" class="panel">
+<h2>Admin Login</h2><p class="muted">Enter your admin email and password.</p>
+<form id="loginForm" class="grid">
+<div class="full"><label for="email">Admin Email</label><input id="email" type="email" value="projects@vanshikainfra.com" autocomplete="username" required></div>
+<div class="full"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Admin password"></div>
+<div class="full row"><button class="btn" type="submit">Sign In</button><span class="small">Password is not saved in this page.</span></div>
+</form><div id="loginStatus" class="status"></div>
+</section>
+<section id="dashboard" class="hidden">
+<div class="panel">
+<h2 id="formTitle">Add Project</h2><p class="muted">Use the form to create or update a project record.</p>
+<form id="projectForm" class="grid">
+<input id="projectId" type="hidden">
+<div><label for="title">Project Title *</label><input id="title" maxlength="150" required placeholder="e.g. Water Treatment Plant"></div>
+<div><label for="location">Location</label><input id="location" maxlength="150" placeholder="Project location"></div>
+<div class="full"><label for="description">Description</label><textarea id="description" maxlength="2000" placeholder="Short project description"></textarea></div>
+<div class="full"><label for="imageUrl">Project Image URL</label><input id="imageUrl" type="url" placeholder="https://..."><div class="small">Paste a public image URL. This field does not upload a file.</div></div>
+<div><label for="projectStatus">Status</label><select id="projectStatus"><option>Ongoing</option><option>Completed</option><option>Upcoming</option></select></div>
+<div class="full row"><button class="btn" id="saveBtn" type="submit">Save Project</button><button class="btn secondary hidden" id="cancelBtn" type="button">Cancel Edit</button><button class="btn secondary" id="refreshBtn" type="button">Refresh Projects</button></div>
+</form><div id="formStatus" class="status"></div>
+</div>
+<div class="panel"><h2>Project List</h2><p class="muted">Projects currently stored in the database.</p><div id="listStatus" class="status"></div><div class="table-wrap"><table><thead><tr><th>Project</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"><tr><td colspan="4">Sign in to load projects.</td></tr></tbody></table></div></div>
+</section>
+</main>
+<footer><div class="wrap">© <span id="year"></span> <b>Vanshika Infra Enterprises</b> · Admin Panel</div></footer>
+<script>
+const SUPABASE_URL='https://fckzhfjagpppcwllsqmg.supabase.co';
+const SUPABASE_KEY='sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrlI0';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+$('year').textContent=new Date().getFullYear();
+function status(id,msg,type='ok'){const el=$(id);el.textContent=msg;el.className='status '+type;}
+function clearStatus(id){$(id).textContent='';$(id).className='status';}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function loggedIn(on){$('loginPanel').classList.toggle('hidden',on);$('dashboard').classList.toggle('hidden',!on);if(on){if(!$('logoutBtn')){const b=document.createElement('button');b.id='logoutBtn';b.className='btn secondary';b.textContent='Logout';b.onclick=async()=>{await db.auth.signOut();loggedIn(false);};document.querySelector('header .nav').appendChild(b);}}else{const b=$('logoutBtn');if(b)b.remove();}}
+async function loadProjects(){clearStatus('listStatus');$('rows').innerHTML='<tr><td colspan="4">Loading…</td></tr>';const {data,error}=await db.from('projects').select('*').order('created_at',{ascending:false});if(error){$('rows').innerHTML='';status('listStatus','Unable to load projects: '+error.message,'err');return;}if(!data.length){$('rows').innerHTML='<tr><td colspan="4">No projects yet. Add your first project above.</td></tr>';return;}$('rows').innerHTML=data.map(p=>`<tr><td><div class="project-name">${esc(p.title)}</div><div class="small">${esc(p.description||'')}</div></td><td>${esc(p.location||'—')}</td><td>${esc(p.status||'—')}</td><td><div class="actions"><button class="btn secondary" data-edit="${esc(p.id)}">Edit</button><button class="btn danger" data-delete="${esc(p.id)}">Delete</button></div></td></tr>`).join('');$('rows').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>edit(data.find(p=>String(p.id)===b.dataset.edit)));$('rows').querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>removeProject(b.dataset.delete));}
+function edit(p){if(!p)return;$('projectId').value=p.id;$('title').value=p.title||'';$('location').value=p.location||'';$('description').value=p.description||'';$('imageUrl').value=p.image_url||'';$('projectStatus').value=p.status||'Ongoing';$('formTitle').textContent='Edit Project';$('saveBtn').textContent='Update Project';$('cancelBtn').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function resetForm(){$('projectForm').reset();$('projectId').value='';$('formTitle').textContent='Add Project';$('saveBtn').textContent='Save Project';$('cancelBtn').classList.add('hidden');clearStatus('formStatus');}
+$('loginForm').onsubmit=async e=>{e.preventDefault();clearStatus('loginStatus');const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){status('loginStatus','Login failed: '+error.message,'err');return;}loggedIn(true);await loadProjects();};
+$('projectForm').onsubmit=async e=>{e.preventDefault();clearStatus('formStatus');$('saveBtn').disabled=true;const payload={title:$('title').value.trim(),location:$('location').value.trim(),description:$('description').value.trim(),image_url:$('imageUrl').value.trim()||null,status:$('projectStatus').value};const id=$('projectId').value;const result=id?await db.from('projects').update(payload).eq('id',id).select():await db.from('projects').insert(payload).select();$('saveBtn').disabled=false;if(result.error){status('formStatus','Save failed: '+result.error.message,'err');return;}status('formStatus',id?'Project updated.':'Project added.');resetForm();await loadProjects();};
+$('cancelBtn').onclick=resetForm;$('refreshBtn').onclick=loadProjects;
+async function removeProject(id){if(!confirm('Delete this project permanently?'))return;const {error}=await db.from('projects').delete().eq('id',id);if(error){status('listStatus','Delete failed: '+error.message,'err');return;}status('listStatus','Project deleted.');await loadProjects();}
+db.auth.getSession().then(async({data})=>{if(data.session){loggedIn(true);await loadProjects();}});
+</script>
+</body>
+</html>
