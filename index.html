@@ -140,7 +140,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
 (async function loadProjects(){
  const container=document.getElementById('liveProjects');
  const SUPABASE_URL='https://fckzhfjagpppcwllsqmg.supabase.co';
- const SUPABASE_KEY='sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrl0I0';
+ const SUPABASE_KEY='sb_publishable_xZ8hc_ci7j5dfUMCUW1W_w_mo-NHNzo';
  try{
   const response=await fetch(SUPABASE_URL+'/rest/v1/projects?select=id,title,location,description,image_url,status&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Accept':'application/json'}});
   if(!response.ok){const detail=await response.text();throw new Error('Supabase HTTP '+response.status+': '+detail);}
