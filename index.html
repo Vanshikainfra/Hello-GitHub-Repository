@@ -142,12 +142,12 @@ document.getElementById('year').textContent=new Date().getFullYear();
  const SUPABASE_URL='https://fckzhfjagpppcwllsqmg.supabase.co';
  const SUPABASE_KEY='sb_publishable_bKZwI2j4PmV20wiYfgQRWQ_pgEJrl0I0';
  try{
-  const response=await fetch(SUPABASE_URL+'/rest/v1/projects?select=id,title,location,description,image_url,status&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
-  if(!response.ok) throw new Error('Could not load projects');
+  const response=await fetch(SUPABASE_URL+'/rest/v1/projects?select=id,title,location,description,image_url,status&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Accept':'application/json'}});
+  if(!response.ok){const detail=await response.text();throw new Error('Supabase HTTP '+response.status+': '+detail);}
   const projects=await response.json();
   if(!projects.length){container.innerHTML='<div class="project-empty">Project details will appear here when they are added through the Admin Panel.</div>';return;}
   container.innerHTML=projects.map(p=>{const title=escapeHtml(p.title||'Project');const location=escapeHtml(p.location||'');const description=escapeHtml(p.description||'');const status=escapeHtml(p.status||'Project');const image=(p.image_url||'').trim();const imageHtml=image?'<img loading="lazy" src="'+escapeAttr(image)+'" alt="'+escapeAttr(title)+'" onerror="this.style.display=\'none\'">':'';return '<article class="live-project-card">'+imageHtml+'<div class="live-project-body"><span class="project-status">'+status+'</span><h3>'+title+'</h3>'+(location?'<div class="project-location">📍 '+location+'</div>':'')+(description?'<p>'+description+'</p>':'')+'</div></article>';}).join('');
- }catch(err){container.innerHTML='<div class="project-empty">Project details are temporarily unavailable. Please check your internet connection or database settings.</div>';console.error(err);}
+ }catch(err){container.innerHTML='<div class="project-empty">Project details could not be loaded. Please check the Supabase Publishable Key and the public SELECT policy for public.projects.</div>';console.error('Vanshika project loading error:',err);}
 })();
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function escapeAttr(value){return escapeHtml(value);}
